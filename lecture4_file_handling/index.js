@@ -22,9 +22,12 @@ const fs = require("fs");
 // console.log(result);
 // console.log(2);
 
+console.log(1);
+
 fs.readFile("./text.txt","utf-8",(err,data)=>{
   console.log("Async",data);
 })
+console.log(2);
 
 const data = fs.readFileSync("./text.txt","utf-8");
 console.log("sync",data);
