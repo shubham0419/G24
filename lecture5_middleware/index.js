@@ -2,6 +2,7 @@ const express = require("express");
 const { genericMiddleware, pathSpecific, verifyUser } = require("./middleware/practice.middleware");
 const app = express();
 const PORT = 4000;
+
 //// generic ,middleware
 // app.use((req,res,next)=>{
 //   console.log("generic middleware 1");
