@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const User = require("../models/user.schema")
+const User = require("../models/user.schema");
 
 router.post("/create", async(req, res) => {
   try {
@@ -21,6 +21,17 @@ router.get("/bulk/upload",async(req,res)=>{
   try {
     await bulkUserUpload();
     res.status(200).json({message:"users uploaded successfully"})
+  } catch (error) {
+    res.status(500).json({message:error.message})
+  }
+})
+
+router.delete("/:id/delete",async(req,res)=>{
+  try {
+    const {id} = req.params;
+    // await User.findByIdAndDelete(id);
+    const result = await User.deleteOne({_id:id});
+    res.status(200).json({message:"user delted successfully",result});
   } catch (error) {
     res.status(500).json({message:error.message})
   }
