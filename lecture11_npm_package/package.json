@@ -1,6 +1,6 @@
 {
   "name": "@shubhamo7/otp-handler",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "its generates otp and verify it",
   "main": "index.js",
   "scripts": {
