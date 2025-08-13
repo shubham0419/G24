@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="container">
+    <h1>Task Manager</h1>
+    <form id="task-form">
+      <input type="text" name="task" placeholder="Add Task">
+      <button>Add</button>
+    </form>
+    <div id="filters">
+      <button id="all" class="active">All</button>
+      <button id="active">Active</button>
+      <button id="completed">Completed</button>
+    </div>
+    <div id="todos-Container">
+    </div>
+
+    <div style="display: flex; justify-content: center; margin-top: 10px;">
+      <button id="clear-btn" style="padding: 4px 10px; background-color: red; color: white;">
+        Clear Completed</button>
+    </div>
+  </div>
+
+
+  <script src="script.js"></script>
+</body>
+</html>
