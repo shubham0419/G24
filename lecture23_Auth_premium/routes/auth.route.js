@@ -72,7 +72,7 @@ router.post("/login",async(req,res)=>{
     const token = jwt.sign({id:user._id,name:user.name},process.env.JWT_SECRET,
       {expiresIn:'1h',algorithm:'HS256'}
     );
-    res.cookie("token",token,{httpOnly:true,secure:true,maxAge:24*60*60*1000})
+    res.cookie("token",token,{httpOnly:true,secure:true,maxAge:24*60*60*1000});
     res.status(200).json({message:"You are loggedin"})
     // res.status(200).json({message:"You are loggedin",token:token})
   } catch (error) {
