@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      background: linear-gradient(120deg, #f4f6fb 60%, #e3eafc 100%);
+      font-family: 'Segoe UI', Arial, sans-serif;
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .signup-container {
+      background: #fff;
+      padding: 2.5rem 2.5rem 2rem 2.5rem;
+      border-radius: 14px;
+      box-shadow: 0 6px 32px rgba(30, 64, 175, 0.10);
+      min-width: 340px;
+      max-width: 370px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 1.7rem;
+      color: #1a237e;
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+      width: 100%;
+    }
+    label {
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+      color: #444;
+      font-size: 1rem;
+      letter-spacing: 0.2px;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      padding: 0.7rem;
+      border: 1.5px solid #e3eafc;
+      border-radius: 7px;
+      font-size: 1rem;
+      transition: border 0.2s;
+      background: #f7faff;
+      margin-bottom: 0.2rem;
+    }
+    input:focus {
+      border-color: #1976d2;
+      outline: none;
+      background: #fff;
+    }
+    button {
+      padding: 0.8rem 0;
+      background: linear-gradient(90deg, #1976d2 60%, #42a5f5 100%);
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      font-size: 1.08rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(30, 64, 175, 0.10);
+      transition: background 0.18s, transform 0.18s;
+      margin-top: 0.5rem;
+    }
+    button:hover {
+      background: linear-gradient(90deg, #1565c0 60%, #1976d2 100%);
+      transform: scale(1.03);
+    }
+    @media (max-width: 500px) {
+      .signup-container {
+        min-width: 90vw;
+        padding: 1.2rem 0.7rem 1rem 0.7rem;
+      }
+      h1 {
+        font-size: 1.4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="signup-container">
+    <h1>Login</h1>
+    <form action="/auth/login" method="post">
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email">
+
+      <label for="pass">Password</label>
+      <input type="password" id="pass" name="password">
+
+      <button>Login</button>
+    </form>
+  </div>
+</body>
+</html>
