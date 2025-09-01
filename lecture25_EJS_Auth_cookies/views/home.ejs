@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      background: linear-gradient(120deg, #f4f6fb 60%, #e3eafc 100%);
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+    h1 {
+      text-align: center;
+      margin-top: 2.5rem;
+      color: #1a237e;
+      letter-spacing: 2px;
+      font-size: 2.5rem;
+      font-weight: 700;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .products-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2.5rem;
+      margin: 3rem auto 2rem auto;
+      max-width: 1300px;
+    }
+    .product-card {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 6px 32px rgba(30, 64, 175, 0.10);
+      padding: 2rem 1.5rem 1.5rem 1.5rem;
+      width: 270px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.18s, box-shadow 0.18s;
+      border: 1.5px solid #e3eafc;
+      position: relative;
+    }
+    .product-card:hover {
+      transform: translateY(-8px) scale(1.035);
+      box-shadow: 0 12px 40px rgba(30, 64, 175, 0.16);
+      border-color: #b6ccfa;
+    }
+    .product-card img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 12px;
+      background: #e9ecef;
+      margin-bottom: 1.2rem;
+      box-shadow: 0 2px 12px rgba(30, 64, 175, 0.07);
+    }
+    .product-card h2 {
+      margin: 0.2rem 0 0.5rem 0;
+      font-size: 1.1rem;
+      color: #222;
+      font-weight: 600;
+      text-align: center;
+      letter-spacing: 0.5px;
+    }
+    .product-card h3 {
+      color: #1976d2;
+      margin: 0.5rem 0 0.2rem 0;
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    .product-card p {
+      color: #555;
+      font-size: 1rem;
+      text-align: center;
+      margin: 0 0 1.2rem 0;
+      min-height: 32px;
+      line-height: 1.4;
+    }
+    @media (max-width: 900px) {
+      .products-container {
+        gap: 1.5rem;
+      }
+      .product-card {
+        width: 90vw;
+        max-width: 340px;
+      }
+    }
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+      .products-container {
+        gap: 1rem;
+        margin: 1.5rem auto;
+      }
+      .product-card {
+        padding: 1.2rem 0.7rem 1rem 0.7rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Products</h1>
+  <div class="products-container">
+    <% products.forEach(product => { %>
+      <form action="/product/<%= product._id %>" class="product-card">
+        <img src="" alt="">
+        <h2><%= product.name %></h2>
+        <h3>₹ <%= product.price %></h3>
+        <p><%= product.description %></p>
+        <button>View Product</button>
+      </form>
+    <% }) %>
+  </div>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      background: linear-gradient(120deg, #f4f6fb 60%, #e3eafc 100%);
+      font-family: 'Segoe UI', Arial, sans-serif;
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .product-container {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 6px 32px rgba(30, 64, 175, 0.10);
+      padding: 2.5rem 2rem;
+      min-width: 340px;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .product-container img {
+      width: 140px;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 12px;
+      background: #e9ecef;
+      margin-bottom: 1.2rem;
+      box-shadow: 0 2px 12px rgba(30, 64, 175, 0.07);
+    }
+    .product-container h2 {
+      margin: 0.3rem 0 0.2rem 0;
+      font-size: 1.4rem;
+      color: #1976d2;
+      font-weight: 700;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+    .product-container h3 {
+      margin: 0.2rem 0 0.7rem 0;
+      font-size: 1.15rem;
+      color: #222;
+      font-weight: 600;
+      text-align: center;
+    }
+    .product-container p {
+      color: #555;
+      font-size: 1rem;
+      text-align: center;
+      margin: 0 0 1.5rem 0;
+      line-height: 1.4;
+    }
+    .product-container button {
+      width: 100%;
+      padding: 0.8rem 0;
+      margin-bottom: 0.7rem;
+      background: linear-gradient(90deg, #1976d2 60%, #42a5f5 100%);
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      font-size: 1.08rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(30, 64, 175, 0.10);
+      transition: background 0.18s, transform 0.18s;
+    }
+    .product-container button:last-child {
+      margin-bottom: 0;
+    }
+    .product-container button:hover {
+      background: linear-gradient(90deg, #1565c0 60%, #1976d2 100%);
+      transform: scale(1.03);
+    }
+    @media (max-width: 500px) {
+      .product-container {
+        min-width: 90vw;
+        padding: 1.2rem 0.7rem 1rem 0.7rem;
+      }
+      .product-container img {
+        width: 90px;
+        height: 90px;
+      }
+      .product-container h2 {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+  <div id="<%= product._id %>" class="product-container">
+    <img src="" alt="">
+    <h2><%= product.name %></h2>
+    <h3>₹ <%= product.price %></h3>
+    <p><%= product.description %></p>
+    <button onclick="buyNormal()">Buy</button>
+    <button onclick="buyGold()">Buy with gold(10% OFF)</button>
+    <button onclick="buyPlatinum()">Buy with platinum(20% OFF)</button>
+  </div>
+  <script>
+    const div = document.getElementsByTagName("div")[0];
+    const productId = div.id;
+    async function buyNormal(){
+      try {
+        // withCredentials:true -> sends cookies
+        const res = await axios.post(`/product/buy/${productId}`,{},{withCredentials:true});
+        alert("Product bought successfully");
+      } catch (error) {
+        alert(error.message);
+      }
+    }
+    async function buyGold(){
+      try {
+        // first apply gold discount
+        const goldRes = await axios.get(`/product/gold/discount/${productId}`,{withCredentials:true});
+        const newPrice = goldRes.data.discountedPrice;
+        // sending the discounted price to buy product 
+        const res = await axios.post(`/product/buy/${productId}`,{price:newPrice},{withCredentials:true});
+        alert("Product bought successfully");
+      } catch (error) {
+        alert(error.message);
+      }
+    }
+  </script>
+</body>
+</html>
