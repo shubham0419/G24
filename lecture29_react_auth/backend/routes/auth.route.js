@@ -90,4 +90,8 @@ router.get("/check",verifyAuth,async (req,res)=>{
   }
 })
 
+router.get("/verify",verifyAuth,(req,res)=>{
+  res.status(200).json({message:"verified"});
+})
+
 module.exports = router;
