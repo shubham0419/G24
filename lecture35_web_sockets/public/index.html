@@ -14,12 +14,15 @@
     <script>
       const socket = io();
 
-      socket.on("connection", (client) => {
-        console.log("client side connection", client.id);
-        client.on("disconnect", () => {
-          console.log("user 2 disconnected");
-        });
+      socket.on("connect", () => {
+        console.log("client side connection", socket.id);
       });
+
+      socket.on("notice",(data)=>{
+        console.log(data);
+      })
+
+      socket.emit("client-event",{message:"data 1"},2,"hellooooo");
 
     </script>
   </body>
