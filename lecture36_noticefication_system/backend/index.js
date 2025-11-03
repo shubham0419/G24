@@ -45,20 +45,6 @@ app.get("/", (req, res) => {
   res.send("server running");
 });
 
-app.post("/create",async (req,res)=>{
-  try {
-    const {username,content} = req.body;
-    const post = {
-      author:username,
-      content,
-      likes:[],
-      cretedAt:new Date()
-    }
-    Posts.unshift(post);
-    res.status(201).json({posts:Posts})
-  } catch (error) {
-    res.status(400).json({message:error.message})
-  }
-})
+
 
 server.listen(PORT, () => console.log("Server running on port " + PORT));
