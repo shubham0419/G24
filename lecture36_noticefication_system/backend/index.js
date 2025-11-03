@@ -24,9 +24,9 @@ app.use(express.static(path.join(__dirname,"public")))
 const Users = {};
 
 //  post - > {
-  // author  -> user
+  // author  -> username
   // content  ->string
-  // likes -> [user]
+  // likes -> [username]
   // createdAt -> date 
 // }
 const Posts = []
@@ -39,6 +39,26 @@ io.on("connection",(client)=>{
     Users[username] = socket.id
   })
   
+})
+
+app.post("/post/create",async (req,res)=>{
+  try {
+    const {username,content} = req.body;
+    const post = {
+      author:username,
+      content,
+      likes:[],
+      createdAt: new Date()
+    }
+    Posts.unshift(post);
+    res.status(201).json({posts:Posts})
+  } catch (error) {
+    res.status(401).json({message:error.message})
+  }
+})
+
+app.get("/post/all",async (req,res)=>{
+  res.status({posts:Posts})
 })
 
 app.get("/", (req, res) => {
