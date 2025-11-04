@@ -4,6 +4,7 @@ const http = require("http");
 const cors = require("cors");
 const server = http.createServer(app);
 const socket = require("socket.io");
+const {v4:uuid} = require("uuid");
 const io = socket(server,{
   cors:{
     origin:"http://localhost:3000",
@@ -24,10 +25,11 @@ app.use(express.static(path.join(__dirname,"public")))
 const Users = {};
 
 //  post - > {
+  // id.  ->.  
   // author  -> username
   // content  ->string
   // likes -> [username]
-  // createdAt -> date 
+  // createdAt -> date
 // }
 const Posts = []
 
@@ -45,6 +47,7 @@ app.post("/post/create",async (req,res)=>{
   try {
     const {username,content} = req.body;
     const post = {
+      id:uuid(),
       author:username,
       content,
       likes:[],
@@ -58,7 +61,16 @@ app.post("/post/create",async (req,res)=>{
 })
 
 app.get("/post/all",async (req,res)=>{
-  res.status({posts:Posts})
+  res.status(200).json({posts:Posts})
+})
+
+app.post("/post/like/:id/:username",(req,res)=>{
+  try {
+    const {id,username} = req.params;
+    
+  } catch (error) {
+    
+  }
 })
 
 app.get("/", (req, res) => {
