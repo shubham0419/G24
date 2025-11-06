@@ -60,17 +60,8 @@ app.post("/post/create",async (req,res)=>{
   }
 })
 
-app.get("/post/all",async (req,res)=>{
+app.get("/post/all",(req,res)=>{
   res.status(200).json({posts:Posts})
-})
-
-app.post("/post/like/:id/:username",(req,res)=>{
-  try {
-    const {id,username} = req.params;
-    
-  } catch (error) {
-    
-  }
 })
 
 app.get("/", (req, res) => {
