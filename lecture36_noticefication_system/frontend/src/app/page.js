@@ -35,6 +35,18 @@ export default function Home() {
     socket?.on("connect",()=>{
       console.log("user connected",socket.id);
     })
+
+    socket?.on("notification",(data)=>{
+      console.log("object");
+      setNotice((prev)=>{
+        return [data,...prev];   // ...prev =>copying prev values of array into new array "[...prev]"
+      })
+    })
+
+    socket?.on("post update",(data)=>{
+      console.log(data);
+      setPosts(data)
+    })
   },[socket])
 
   const handleSubmit = (e)=>{
@@ -44,14 +56,6 @@ export default function Home() {
     setRefresh(prev=>prev+1);
   }
 
-  useEffect(()=>{
-    socket?.on("noticefication",(data)=>{
-      console.log("object");
-      setNotice((prev)=>{
-        return [data,...prev];   // ...prev =>copying prev values of array into new array "[...prev]"
-      })
-    })
-  },[])
 
   if(!isLoggenIn){
     return (
@@ -88,8 +92,8 @@ export default function Home() {
     <div className="min-h-screen w-full bg-white text-black px-20 py-10">
       <h1 className="text-2xl font-semibold">Hello {username}!!</h1>
 
-      {notice.map((not)=>{
-        return <div className="absolute top-10 right-5 border shadow-lg p-5 bg-green-300">
+      {notice.map((not,ind)=>{
+        return <div key={ind} className="fixed text-xs top-10 right-5 border shadow-lg px-3 rounded-lg py-2 bg-green-500 capitalize">
           {not}
         </div>
       })}
@@ -109,10 +113,11 @@ export default function Home() {
               </div>
               <h2 className="text-lg font-semibold capitalize">{post.content}</h2>
               <p className="text-xs text-gray-300 text-right">{new Date(post.createdAt).toLocaleDateString()}</p>
-              <div onClick={()=>handlePostLike(post.id)} className="flex gap-2">
-              {post.likes.includes(username)?<IconHeart fill="red"/>:<IconHeart/>}
-                {post.likes.length} Likes
-              </div>
+              <button disabled={post.likes?.includes(username)} onClick={()=>handlePostLike(post.id)} 
+                className={`flex gap-2 ${post.likes?.includes(username)?"opacity-80 cursor-not-allowed":""}`}>
+                {post?.likes?.includes(username)?<IconHeart fill="red"/>:<IconHeart/>}
+                {post?.likes?.length} Likes
+              </button>
           </div>
         })}
       </div>

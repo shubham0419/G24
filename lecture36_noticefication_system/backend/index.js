@@ -38,7 +38,7 @@ io.on("connection",(client)=>{
   
   // register user
   client.on("register",(username)=>{
-    Users[username] = socket.id
+    Users[username] = client.id
   })
   
 })
@@ -54,6 +54,7 @@ app.post("/post/create",async (req,res)=>{
       createdAt: new Date()
     }
     Posts.unshift(post);
+    io.emit("post update",Posts);
     res.status(201).json({posts:Posts})
   } catch (error) {
     res.status(401).json({message:error.message})
@@ -67,13 +68,20 @@ app.post("/post/like/:id/:username",(req,res)=>{
     let content;
     Posts = Posts.map((post)=>{
       if(post.id==id){
+        if(post.likes.includes(username)){
+          throw new Error("Alredy Liked the post.")
+        }
         author = post.author;
         content = post.content;
         post.likes.push(username)
       }
       return post;
     })
-    io.to(Users[author]).emit("noticefication",`${username} liked your post ${content}`)
+
+    if(Users[author] && Users[author] != Users[username]){
+      io.to(Users[author]).emit("notification",`${username} liked your post ${content}`)
+      io.emit("post update",Posts);
+    }
     res.status(200).json({posts:Posts});
   } catch (error) {
     res.status(402).json({message:error.message})
