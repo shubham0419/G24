@@ -45,7 +45,6 @@ app.get("/sets",async (req,res)=>{
     const res2 = await client.sadd("myset","hello");
 
     const data = await client.smembers("myset");
-
     const check = await client.sismember("myset","hello");
     res.json({data,check});
   } catch (error) {

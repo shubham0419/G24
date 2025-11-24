@@ -15,13 +15,13 @@ export default function Home() {
 
   // socket client initialise
   useEffect(()=>{
-    const newSocket = io("http://localhost:4000");
+    const newSocket = io("https://g24.onrender.com");
     setSocket(newSocket);
   },[])
 
   const gettAllPosts = async ()=>{
     if(isLoggenIn){
-      let res = await axios.get("http://localhost:4000/post/all");
+      let res = await axios.get("https://g24.onrender.com/post/all");
       setPosts(res.data.posts)
     }
   }
@@ -75,14 +75,14 @@ export default function Home() {
       username,
       content
     }
-    let res = await axios.post("http://localhost:4000/post/create",payload);
+    let res = await axios.post("https://g24.onrender.com/post/create",payload);
     if(res.status==201){
       setRefresh(prev=>prev+1);
     }
   }
 
   const handlePostLike = async (id)=>{
-    let res = await axios.post(`http://localhost:4000/post/like/${id}/${username}`);
+    let res = await axios.post(`https://g24.onrender.com/post/like/${id}/${username}`);
     if(res.status=200){
       setRefresh(prev=>prev+1);
     }
