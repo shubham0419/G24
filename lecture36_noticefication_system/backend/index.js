@@ -7,7 +7,7 @@ const socket = require("socket.io");
 const {v4:uuid} = require("uuid");
 const io = socket(server,{
   cors:{
-    origin:"http://localhost:3000",
+    origin:"https://g25.vercel.app/",
   }
 });
 const PORT = 4000;
